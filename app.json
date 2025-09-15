@@ -11,7 +11,13 @@
     "url": "",
     "logo": "",
     "dependencies": [
-{
+    {
+            "id": "64c9d5e2-7744-4866-bc0e-5ebc2898e651",
+            "name": "Error Messages with Recommendations",
+            "publisher": "Microsoft",
+            "version": "26.1.33404.33834"
+        }, 
+        {
             "id": "7819d79d-feea-4f09-bbed-5bbaca4bf323",
             "name": "Data Archive",
             "publisher": "Microsoft",
