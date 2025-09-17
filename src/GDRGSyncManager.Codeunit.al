@@ -1,5 +1,10 @@
 codeunit 50100 "GDRG Sync Manager"
 {
+
+    Permissions = tabledata "GDRG Product" = rimd,
+                  tabledata "GDRG Product Buffer" = rimd,
+                  tabledata "Field Buffer" = rimd;
+
     var
         TypeHelper: Codeunit "Type Helper";
 
@@ -10,13 +15,13 @@ codeunit 50100 "GDRG Sync Manager"
     procedure SyncToBusinessCentral(var ProductBuffer: Record "GDRG Product Buffer")
     begin
         // Check if already deleted
-        if ProductBuffer."Sync Status" = ProductBuffer."Sync Status"::Deleted then
+        if ProductBuffer."Sync Status" = "GDRG Sync Status"::Deleted then
             exit;
 
         if not TrySyncToBusinessCentral(ProductBuffer) then begin
-            ProductBuffer.UpdateSyncStatus(ProductBuffer."Sync Status"::Error);
-            ProductBuffer."Last Modified" := CurrentDateTime;
-            ProductBuffer.Modify();
+            ProductBuffer.UpdateSyncStatus("GDRG Sync Status"::Error);
+            ProductBuffer."Last Modified" := CurrentDateTime();
+            ProductBuffer.Modify(true);
         end;
     end;
 
@@ -49,7 +54,7 @@ codeunit 50100 "GDRG Sync Manager"
         else
             Product.Insert(true);
 
-        ProductBuffer.UpdateSyncStatus(ProductBuffer."Sync Status"::Synced);
+        ProductBuffer.UpdateSyncStatus("GDRG Sync Status"::Synced);
 
         UpdateBufferFromBC(Product, ProductBuffer);
     end;
@@ -64,7 +69,7 @@ codeunit 50100 "GDRG Sync Manager"
     begin
         if ProductBuffer.Get(Product."No.") then begin
             UpdateBufferFromBC(Product, ProductBuffer);
-            ProductBuffer.Modify();
+            ProductBuffer.Modify(true);
         end;
     end;
 
@@ -72,7 +77,7 @@ codeunit 50100 "GDRG Sync Manager"
     var
         ProductBuffer: Record "GDRG Product Buffer";
     begin
-        TempFieldBuffer.DeleteAll();
+        TempFieldBuffer.DeleteAll(false);
 
         AddFieldToBuffer(TempFieldBuffer, Database::"GDRG Product Buffer", ProductBuffer.FieldNo("No."));
         AddFieldToBuffer(TempFieldBuffer, Database::"GDRG Product Buffer", ProductBuffer.FieldNo(Description));
@@ -94,7 +99,7 @@ codeunit 50100 "GDRG Sync Manager"
         TempFieldBuffer.Order := LastOrderNo;
         TempFieldBuffer."Table ID" := TableID;
         TempFieldBuffer."Field ID" := FieldID;
-        TempFieldBuffer.Insert();
+        TempFieldBuffer.Insert(false);
     end;
 
     local procedure UpdateBufferFromBC(var Product: Record "GDRG Product"; var ProductBuffer: Record "GDRG Product Buffer")
@@ -104,24 +109,24 @@ codeunit 50100 "GDRG Sync Manager"
         ProductBuffer."Unit Price" := Product."Unit Price";
         ProductBuffer."Category Code" := Product."Category Code";
         ProductBuffer."Vendor No." := Product."Vendor No.";
-        ProductBuffer."Last Modified" := CurrentDateTime;
+        ProductBuffer."Last Modified" := CurrentDateTime();
     end;
 
-    [EventSubscriber(ObjectType::Table, Database::"GDRG Product", 'OnAfterInsertEvent', '', false, false)]
+    [EventSubscriber(ObjectType::Table, Database::"GDRG Product", OnAfterInsertEvent, '', false, false)]
     local procedure OnAfterInsertProduct(var Rec: Record "GDRG Product"; RunTrigger: Boolean)
     begin
         if RunTrigger then
             SyncFromBusinessCentral(Rec);
     end;
 
-    [EventSubscriber(ObjectType::Table, Database::"GDRG Product", 'OnAfterModifyEvent', '', false, false)]
+    [EventSubscriber(ObjectType::Table, Database::"GDRG Product", OnAfterModifyEvent, '', false, false)]
     local procedure OnAfterModifyProduct(var Rec: Record "GDRG Product"; var xRec: Record "GDRG Product"; RunTrigger: Boolean)
     begin
         if RunTrigger then
             SyncFromBusinessCentral(Rec);
     end;
 
-    [EventSubscriber(ObjectType::Table, Database::"GDRG Product", 'OnAfterDeleteEvent', '', false, false)]
+    [EventSubscriber(ObjectType::Table, Database::"GDRG Product", OnAfterDeleteEvent, '', false, false)]
     local procedure OnAfterDeleteProduct(var Rec: Record "GDRG Product"; RunTrigger: Boolean)
     var
         ProductBuffer: Record "GDRG Product Buffer";
@@ -130,9 +135,9 @@ codeunit 50100 "GDRG Sync Manager"
             exit;
 
         if ProductBuffer.Get(Rec."No.") then begin
-            ProductBuffer.UpdateSyncStatus(ProductBuffer."Sync Status"::Deleted);
-            ProductBuffer."Last Modified" := CurrentDateTime;
-            ProductBuffer.Modify();
+            ProductBuffer.UpdateSyncStatus("GDRG Sync Status"::Deleted);
+            ProductBuffer."Last Modified" := CurrentDateTime();
+            ProductBuffer.Modify(true);
         end;
     end;
 

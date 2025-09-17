@@ -15,6 +15,16 @@ page 50102 "GDRG Product API"
         {
             repeater(Group)
             {
+                field(id; Rec.SystemId)
+                {
+                    Caption = 'Id';
+                    Editable = false;
+                }
+                field(lastModifiedDateTime; Rec.SystemModifiedAt)
+                {
+                    Caption = 'Last Modified Date Time';
+                    Editable = false;
+                }
                 field(no; Rec."No.")
                 {
                     Caption = 'No.';
@@ -88,7 +98,7 @@ page 50102 "GDRG Product API"
         if Rec."Auto Sync" then
             SyncManager.SyncToBusinessCentral(Rec)
         else
-            Rec.UpdateSyncStatus(Rec."Sync Status"::Pending);
+            Rec.UpdateSyncStatus("GDRG Sync Status"::Pending);
 
         exit(false);
     end;
@@ -100,7 +110,7 @@ page 50102 "GDRG Product API"
         if Rec."Auto Sync" then
             SyncManager.SyncToBusinessCentral(Rec)
         else
-            Rec.UpdateSyncStatus(Rec."Sync Status"::Pending);
+            Rec.UpdateSyncStatus("GDRG Sync Status"::Pending);
 
         exit(true);
     end;
