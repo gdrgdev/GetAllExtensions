@@ -11,94 +11,82 @@
     "url": "",
     "logo": "",
     "dependencies": [
-             {
-            "id": "114e4e19-182b-42e2-b5a9-91d8b8ee8ce1",
-            "name": "_Exclude_Email Logging Using Graph API",
-            "publisher": "Microsoft",
-            "version": "27.0.38460.39927"
+        {
+            "id": "fe18762b-e41c-4778-a1d3-f67aa7e17525",
+            "name": "ACT - Purchase Requisition and Sourcing",
+            "publisher": "CRT Insights Technologies SDN BHD",
+            "version": "23.0.0.0"
         },
         {
             "id": "64c9d5e2-7744-4866-bc0e-5ebc2898e651",
             "name": "Error Messages with Recommendations",
             "publisher": "Microsoft",
-            "version": "27.0.38460.39927"
+            "version": "26.5.38752.38944"
         }, 
         {
             "id": "7819d79d-feea-4f09-bbed-5bbaca4bf323",
             "name": "Data Archive",
             "publisher": "Microsoft",
-            "version": "27.0.38460.39927"
+            "version": "26.5.38752.38944"
         },         
         {
             "id": "6f2c034f-5ebe-4eae-b34c-90a0d4e87687",
             "name": "_Exclude_Business_Events_",
             "publisher": "Microsoft",
-            "version": "27.0.38460.39927"
+            "version": "26.5.38752.38944"
         },        
         {
             "id": "e4e86220-cac0-4ec3-b853-7c2fa610399d",
             "name": "PowerBI Reports",
             "publisher": "Microsoft",
-            "version": "27.0.38460.39927"
+            "version": "26.5.38752.38944"
         },
         {
             "id": "b3780cd9-f8f8-4a83-a4d5-0c2ad87b28af",
             "name": "Sustainability",
             "publisher": "Microsoft",
-            "version": "27.0.38460.39927"
+            "version": "26.5.38752.38944"
         },
         {
             "id": "10cb69d9-bc8a-4d27-970a-9e110e9db2a5",
             "name": "_Exclude_APIV2_",
             "publisher": "Microsoft",
-            "version": "27.0.38460.39927"
+            "version": "26.5.38752.38944"
         },
         {
             "id": "cc11c22e-5ca3-423f-8804-88cac6d91983",
             "name": "Dynamics BC Excel Reports",
             "publisher": "Microsoft",
-            "version": "27.0.38460.39927"
+            "version": "26.5.38752.38944"
         },
         {
             "id": "a01864f8-9c3f-42f6-8328-8d7be1ce3e20",
             "name": "_Exclude_Master_Data_Management",
             "publisher": "Microsoft",
-            "version": "27.0.38460.39927"
-        },
-        {
-            "id": "23b1772f-b8b8-4e87-9339-9ff7cbb2364b",
-            "name": "Sales Order Agent",
-            "publisher": "Microsoft",
-            "version": "27.0.38460.39927"
-        },
-                {
-            "id": "14aa1237-2f69-4c25-9a68-fa7d54e08613",
-            "name": "Payables Agent",
-            "publisher": "Microsoft",
-            "version": "27.0.38460.39927"
+            "version": "26.5.38752.38944"
         },
         {
             "id": "3099ffc7-4cf7-4df6-9b96-7e4bc2bb587c",
             "name": "Subscription Billing",
             "publisher": "Microsoft",
-            "version": "27.0.38460.39927"
+            "version": "26.5.38752.38944"
         },
         {
             "id": "ea130081-c669-460f-a5f4-5dde14f03131",
             "name": "Statistical Accounts",
             "publisher": "Microsoft",
-            "version": "27.0.38460.39927"
+            "version": "26.5.38752.38944"
         },
         {
             "id": "ec255f57-31d0-4ca2-b751-f2fa7c745abb",
             "name": "Shopify Connector",
             "publisher": "Microsoft",
-            "version": "27.0.38460.39927"
+            "version": "26.5.38752.38944"
         }
     ],
     "screenshots": [],
     "platform": "1.0.0.0",
-    "application": "27.0.0.0",
+    "application": "26.0.0.0",
     "idRanges": [
         {
             "from": 50100,
@@ -110,7 +98,7 @@
         "allowDownloadingSource": true,
         "includeSourceInSymbolFile": true
     },
-    "runtime": "16.0",
+    "runtime": "15.0",
     "features": [
         "NoImplicitWith"
     ]
